@@ -67,7 +67,7 @@ else:
                 if ($check_email_stmt->rowCount()):
                     $returnData = msg(0, 422, 'This E-mail already in use!');
                 else:
-                    $insert_query = "INSERT INTO `users`(`name`,`email`,`mobile`,`password`, `balance`) VALUES(:name,:email,:mobile,:password, 0)";
+                    $insert_query = "INSERT INTO `users`(`name`,`email`,`mobile`,`password`, `balance`, `role`) VALUES(:name,:email,:mobile,:password, 0, 'user')";
 
                     $insert_stmt = $conn->prepare($insert_query);
 
