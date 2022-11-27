@@ -74,7 +74,6 @@ else:
                     // DATA BINDING
                     $insert_stmt->bindValue(':name', htmlspecialchars(strip_tags($name)), PDO::PARAM_STR);
                     $insert_stmt->bindValue(':email', $email, PDO::PARAM_STR);
-                    $insert_stmt->bindValue(':mobile', $mobile, PDO::PARAM_STR);
                     $insert_stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT), PDO::PARAM_STR);
 
                     $insert_stmt->execute();
