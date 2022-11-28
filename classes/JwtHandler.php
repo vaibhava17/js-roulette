@@ -24,13 +24,10 @@ class JwtHandler
         $this->jwt_secrect = "this_is_my_secrect";
     }
 
-    public function jwtEncodeData($iss, $data)
+    public function jwtEncodeData($data)
     {
 
         $this->token = array(
-            //Adding the identifier to the token (who issue the token)
-            "iss" => $iss,
-            "aud" => $iss,
             // Adding the current timestamp to the token, for identifying that when the token was issued.
             "iat" => $this->issuedAt,
             // Token expiration

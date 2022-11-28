@@ -71,7 +71,6 @@ else:
 
                     $jwt = new JwtHandler();
                     $token = $jwt->jwtEncodeData(
-                        'http://localhost/php_auth_api/',
                         array(
                             "user_id" => $row['id'],
                             "user_email" => $row['email'],
