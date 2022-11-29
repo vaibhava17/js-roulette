@@ -7,27 +7,18 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 require __DIR__ . '/classes/db.config.php';
 require __DIR__ . '/classes/jwt.handler.php';
-
-function msg($success, $status, $message, $extra = [])
-{
-    return array_merge([
-        'success' => $success,
-        'status' => $status,
-        'message' => $message
-    ], $extra);
-}
+require __DIR__ . '/classes/error.handler.php';
 
 $db_connection = new Database();
 $conn = $db_connection->dbConnection();
+$error_handler = new ErrorHandler();
 
 $data = json_decode(file_get_contents("php://input"));
 $returnData = [];
 
-// IF REQUEST METHOD IS NOT EQUAL TO POST
 if ($_SERVER["REQUEST_METHOD"] != "POST"):
-    $returnData = msg(0, 404, 'Page Not Found!');
+    $returnData = $error_handler->getResponse(0, 404, 'Page Not Found!');
 
-    // CHECKING EMPTY FIELDS
 elseif (
     !isset($data->mobile)
     || !isset($data->password)
@@ -35,23 +26,20 @@ elseif (
     || empty(trim($data->password))
 ):
 
-    $fields = ['fields' => ['mobile', 'password']];
-    $returnData = msg(0, 422, 'Please Fill in all Required Fields!', $fields);
+$fields = ['fields' => ['mobile', 'password']];
+    $returnData = $error_handler->getResponse(0, 422, 'Please Fill in all Required Fields!', $fields);
 
-    // IF THERE ARE NO EMPTY FIELDS THEN-
 else:
     $mobile = trim($data->mobile);
     $password = trim($data->password);
 
     // CHECKING THE MOLBILE FORMAT (IF INVALID FORMAT)
     if (strlen($mobile)>10):
-        $returnData = msg(0, 422, 'Invalid Mobile Number!');
+        $returnData = $error_handler->getResponse(0, 422, 'Invalid Email Address!');
 
-        // IF PASSWORD IS LESS THAN 8 THE SHOW THE ERROR
     elseif (strlen($password) < 8):
-        $returnData = msg(0, 422, 'Your password must be at least 8 characters long!');
+        $returnData = $error_handler->getResponse(0, 422, 'Your password must be at least 8 characters long!');
 
-        // THE USER IS ABLE TO PERFORM THE LOGIN ACTION
     else:
         try {
 
@@ -60,13 +48,10 @@ else:
             $query_stmt->bindValue(':mobile', $mobile, PDO::PARAM_STR);
             $query_stmt->execute();
 
-            // IF THE USER IS FOUNDED BY MOBILE
             if ($query_stmt->rowCount()):
                 $row = $query_stmt->fetch(PDO::FETCH_ASSOC);
                 $check_password = password_verify($password, $row['password']);
 
-                // VERIFYING THE PASSWORD (IS CORRECT OR NOT?)
-                // IF PASSWORD IS CORRECT THEN SEND THE LOGIN TOKEN
                 if ($check_password):
 
                     $jwt = new JwtHandler();
@@ -85,17 +70,15 @@ else:
                         'token' => $token
                     ];
 
-                    // IF INVALID PASSWORD
                 else:
-                    $returnData = msg(0, 422, 'Invalid Password!');
+                    $returnData = $error_handler->getResponse(0, 422, 'Invalid Password!');
                 endif;
 
-                // IF THE USER IS NOT FOUNDED BY MOBILE THEN SHOW THE FOLLOWING ERROR
             else:
-                $returnData = msg(0, 422, 'Invalid Mobile Numberrrrrrr!');
+                $returnData = $error_handler->getResponse(0, 422, 'Invalid Email Address!');
             endif;
         } catch (PDOException $e) {
-            $returnData = msg(0, 500, $e->getMessage());
+            $returnData = $error_handler->getResponse(0, 500, $e->getMessage());
         }
 
     endif;

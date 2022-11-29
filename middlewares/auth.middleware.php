@@ -1,12 +1,17 @@
 <?php
 require './classes/jwt.handler.php';
 
-class Auth extends JwtHandler
+
+
+class Auth extends JwtHandler 
 {
     protected $db;
     protected $headers;
-    protected $token;
 
+    protected $error_handler;
+
+    protected $token;
+    
     public function __construct($db, $headers)
     {
         parent::__construct();
@@ -23,41 +28,20 @@ class Auth extends JwtHandler
 
             if (
                 isset($data['data']->user_id) &&
-                $user = $this->fetchUser($data['data']->user_id)
-            ) :
-                return [
-                    "success" => 1,
-                    "user" => $user
-                ];
-            else :
-                return [
-                    "success" => 0,
-                    "message" => $data['message'],
-                ];
-            endif;
+                isset($data['data']->user_email) &&
+                isset($data['data']->user_role)
+            ) {
+                return $data['data'];
+            } else {
+                return false;
+            }
         } else {
-            return [
-                "success" => 0,
-                "message" => "Token not found in request"
-            ];
+            return false;
         }
     }
 
-    protected function fetchUser($user_id)
+    public function getUserId()
     {
-        try {
-            $fetch_user_by_id = "SELECT `name`,`email`,`balance`,`mobile` FROM `users` WHERE `id`=:id";
-            $query_stmt = $this->db->prepare($fetch_user_by_id);
-            $query_stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
-            $query_stmt->execute();
-
-            if ($query_stmt->rowCount()) :
-                return $query_stmt->fetch(PDO::FETCH_ASSOC);
-            else :
-                return false;
-            endif;
-        } catch (PDOException $e) {
-            return null;
-        }
+        return $this->isValid()->user_id;
     }
 }
