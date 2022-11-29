@@ -41,6 +41,8 @@ else:
         $password = trim($data->password);
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)):
             $returnData = $error_handler->getResponse(0, 422, 'Invalid Email Address!');
+        elseif (strlen($mobile) > 10):
+            $returnData = $error_handler->getResponse(0, 422, 'Invalid Mobile Number!');
         elseif (strlen($password) < 8):
             $returnData = $error_handler->getResponse(0, 422, 'Your password must be at least 8 characters long!');
         elseif (strlen($name) < 3):

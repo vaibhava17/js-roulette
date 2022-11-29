@@ -33,7 +33,7 @@ else:
 
     // CHECKING THE MOLBILE FORMAT (IF INVALID FORMAT)
     if (strlen($mobile) > 10):
-        $returnData = $error_handler->getResponse(0, 422, 'Invalid Email Address!');
+        $returnData = $error_handler->getResponse(0, 422, 'Invalid Mobile Address!');
     elseif (strlen($password) < 8):
         $returnData = $error_handler->getResponse(0, 422, 'Your password must be at least 8 characters long!');
     else:
