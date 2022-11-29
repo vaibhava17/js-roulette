@@ -28,7 +28,7 @@ class Auth extends JwtHandler
 
             if (
                 isset($data['data']->user_id) &&
-                isset($data['data']->user_email) &&
+                isset($data['data']->user_mobile) &&
                 isset($data['data']->user_role)
             ) {
                 return $data['data'];
