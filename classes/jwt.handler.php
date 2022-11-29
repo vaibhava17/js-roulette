@@ -1,6 +1,8 @@
 <?php
 require './vendor/autoload.php';
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 use Firebase\JWT\JWT;
 
 class JwtHandler
@@ -13,26 +15,20 @@ class JwtHandler
 
     public function __construct()
     {
-        // set your default time-zone
         date_default_timezone_set('Asia/Kolkata');
         $this->issuedAt = time();
 
-        // Token Validity (3600 second = 1hr)
-        $this->expire = $this->issuedAt + 3600;
+        $this->expire = $this->issuedAt + 3600 * 24 * 7; // 7 days
 
-        // Set your secret or signature
-        $this->jwt_secrect = "this_is_my_secrect";
+        $this->jwt_secrect = $_ENV['JWT_SECRECT'];;
     }
 
     public function jwtEncodeData($data)
     {
 
         $this->token = array(
-            // Adding the current timestamp to the token, for identifying that when the token was issued.
             "iat" => $this->issuedAt,
-            // Token expiration
             "exp" => $this->expire,
-            // Payload
             "data" => $data
         );
 
