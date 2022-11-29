@@ -30,32 +30,28 @@ if ($_SERVER["REQUEST_METHOD"] != "POST"):
     // CHECKING EMPTY FIELDS
 elseif (
     !isset($data->mobile)
-    || !isset($data->password)
+    
     || empty(trim($data->mobile))
-    || empty(trim($data->password))
+  
 ):
 
-    $fields = ['fields' => ['mobile', 'password']];
-    $returnData = msg(0, 422, 'Please Fill in all Required Fields!', $fields);
+    $fields = ['fields' => ['mobile']];
+    $returnData = msg(0, 422, 'Please Send Mobile Number!', $fields);
 
     // IF THERE ARE NO EMPTY FIELDS THEN-
 else:
     $mobile = trim($data->mobile);
-    $password = trim($data->password);
+ 
 
     // CHECKING THE MOLBILE FORMAT (IF INVALID FORMAT)
     if (strlen($mobile)>10):
         $returnData = msg(0, 422, 'Invalid Mobile Number!');
 
-        // IF PASSWORD IS LESS THAN 8 THE SHOW THE ERROR
-    elseif (strlen($password) < 8):
-        $returnData = msg(0, 422, 'Your password must be at least 8 characters long!');
-
-        // THE USER IS ABLE TO PERFORM THE LOGIN ACTION
+        // THE USER IS ABLE TO PERFORM THE Balnce ACTION
     else:
         try {
 
-            $fetch_user_by_mobile = "SELECT * FROM `users` WHERE `mobile`=:mobile";
+            $fetch_user_by_mobile = "SELECT 'balance'  FROM `users` WHERE `mobile`=:mobile";
             $query_stmt = $conn->prepare($fetch_user_by_mobile);
             $query_stmt->bindValue(':mobile', $mobile, PDO::PARAM_STR);
             $query_stmt->execute();
@@ -82,7 +78,7 @@ else:
                     $returnData = [
                         'success' => 1,
                         'message' => 'You have successfully logged in.',
-                        'token' => $token
+                        'balance' => $token
                     ];
 
                     // IF INVALID PASSWORD

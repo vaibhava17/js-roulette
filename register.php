@@ -50,8 +50,8 @@ else:
         $email = trim($data->email);
         $mobile = trim($data->mobile);
         $password = trim($data->password);
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)):
-            $returnData = msg(0, 422, 'Invalid Email Address!');
+        if (strlen($mobile)<10 || strlen($mobile)>10):
+            $returnData = msg(0, 422, 'Invalid Mobile Number!');
         elseif (strlen($password) < 8):
             $returnData = msg(0, 422, 'Your password must be at least 8 characters long!');
         elseif (strlen($name) < 3):
@@ -59,13 +59,13 @@ else:
         else:
             try {
 
-                $check_email = "SELECT `email` FROM `users` WHERE `email`=:email";
-                $check_email_stmt = $conn->prepare($check_email);
-                $check_email_stmt->bindValue(':email', $email, PDO::PARAM_STR);
-                $check_email_stmt->execute();
+                $check_mobile = "SELECT `mobile` FROM `users` WHERE `mobile`=:mobile";
+                $check_mobile_stmt = $conn->prepare($check_mobile);
+                $check_mobile_stmt->bindValue(':mobile', $mobile, PDO::PARAM_STR);
+                $check_mobile_stmt->execute();
 
-                if ($check_email_stmt->rowCount()):
-                    $returnData = msg(0, 422, 'This E-mail already in use!');
+                if ($check_mobile_stmt->rowCount()):
+                    $returnData = msg(0, 422, 'This Mobile Number already Registered!');
                 else:
                     $insert_query = "INSERT INTO `users`(`name`,`email`,`mobile`,`password`, `balance`, `role`) VALUES(:name,:email,:mobile,:password, 0, 'user')";
 
