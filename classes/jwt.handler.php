@@ -20,7 +20,7 @@ class JwtHandler
 
         $this->expire = $this->issuedAt + 3600 * 24 * 7; // 7 days
 
-        $this->jwt_secrect = $_ENV['JWT_SECRECT'];;
+        $this->jwt_secrect = $_ENV['JWT_SECRECT'];
     }
 
     public function jwtEncodeData($data)
