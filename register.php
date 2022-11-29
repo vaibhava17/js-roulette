@@ -51,7 +51,7 @@ else:
                 $check_mobile_stmt = $conn->prepare($check_mobile);
                 $check_mobile_stmt->bindValue(':mobile', $mobile, PDO::PARAM_STR);
                 $check_mobile_stmt->execute();
-                if ($check_email_stmt->rowCount()):
+                if ($check_mobile_stmt->rowCount()):
                     $returnData = $error_handler->getResponse(0, 422, 'This mobile is already in use!');
                 else:
                     $insert_query = "INSERT INTO `users`(`name`,`email`,`mobile`,`password`, `balance`, `role`) VALUES(:name,:email,:mobile,:password, :balance, :role)";
