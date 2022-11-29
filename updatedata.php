@@ -1,27 +1,16 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: access");
-header("Access-Control-Allow-Methods: POST");
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+require __DIR__.'/classes/db.config.php';
+require __DIR__.'/classes/error.handler.php';
 
-require __DIR__ . '/classes/db.config.php';
-require __DIR__ . '/classes/error.handler.php';
-require __DIR__ . '/middlewares/admin.middleware.php';
-
-$allHeaders = getallheaders();
 $db_connection = new Database();
 $conn = $db_connection->dbConnection();
 $error_handler = new ErrorHandler();
-$auth = new AdminAuth($conn, $allHeaders);
 
 $data = json_decode(file_get_contents("php://input"));
 $returnData = [];
 
 if ($_SERVER["REQUEST_METHOD"] != "PUT"):
   $returnData = $error_handler->getResponse(0, 404, 'Page Not Found!');
-elseif (!$auth->isValid()):
-  $returnData = $error_handler->getResponse(0, 401, 'Unauthorized!');
 else:
   if (empty($data) || !isset($data->mobile) || empty(trim($data->mobile))):
     $returnData = $error_handler->getResponse(0, 422, 'Invalid Data! Please try again.');
