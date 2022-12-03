@@ -11,7 +11,7 @@ $returnData = [];
 
 if ($_SERVER["REQUEST_METHOD"] != "GET"):
   $returnData = $error_handler->getResponse(0, 404, 'Page Not Found!');
-elseif (empty($data) || (!isset($data->mobile) || empty(trim($data->mobile)))|| (!isset($data->game_id) || empty(trim($data->game_id)))):
+elseif (empty($data) || !isset($data->mobile) || empty(trim($data->mobile))):
   $returnData = $error_handler->getResponse(0, 422, 'Mobile number is required!');
 else:
   try {
@@ -20,8 +20,8 @@ else:
     $fetch_user_stmt->bindValue(':mobile', $data->mobile, PDO::PARAM_INT);
     $fetch_user_stmt->execute();
     if ($fetch_user_stmt->rowCount()):
-      $game_history = $fetch_user_stmt->fetch(PDO::FETCH_ASSOC);
-      $returnData = $error_handler->getResponse(1, 200, 'Record found!', $game_history);
+      $user = $fetch_user_stmt->fetch(PDO::FETCH_ASSOC);
+      $returnData = $error_handler->getResponse(1, 200, 'Mobile found!', $user);
     else:
       $returnData = $error_handler->getResponse(0, 422, 'No Data found!');
     endif;
