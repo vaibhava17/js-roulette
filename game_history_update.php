@@ -8,8 +8,8 @@ $error_handler = new ErrorHandler();
 
 $data = json_decode(file_get_contents("php://input"));
 $returnData = [];
-$mobile = $_GET['mobile'];
-$game_id = $_GET['game_id'];
+$game_id = isset($_GET['game_id']) ? $_GET['game_id'] : null;
+$mobile = isset($_GET['mobile']) ? $_GET['mobile'] : null;
 
 if ($_SERVER["REQUEST_METHOD"] != "PUT"):
   $returnData = $error_handler->getResponse(0, 404, 'Page Not Found!');
