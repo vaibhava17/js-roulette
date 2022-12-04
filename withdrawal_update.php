@@ -1,6 +1,6 @@
 <?php
-require __DIR__.'/classes/db.config.php';
-require __DIR__.'/classes/error.handler.php';
+require __DIR__ . '/classes/db.config.php';
+require __DIR__ . '/classes/error.handler.php';
 
 $db_connection = new Database();
 $conn = $db_connection->dbConnection();
@@ -17,37 +17,29 @@ else:
   if (empty($data) && ($mobile || $withdrawid)):
     $returnData = $error_handler->getResponse(0, 422, 'Invalid Data! Please try again.');
   else:
-    try{
-      $fetch_user = "SELECT * FROM withdrawal WHERE mobile=:mobile OR withdrawid=:mobile";
-      $fetch_user_stmt = $conn->prepare($fetch_user);
-      $fetch_user_stmt->bindValue(':mobile',$withdrawid ?? $mobile, PDO::PARAM_STR);
-      $fetch_user_stmt->execute();
-      if ($fetch_user_stmt->rowCount()):
-        $withdraw = $fetch_user_stmt->fetch(PDO::FETCH_ASSOC);
-        if (!empty($withdraw)):
-          $update_user = "UPDATE `withdrawal` SET userid=:userid,remainingbalance=:remainingbalance, withdrawamount=:withdrawamount, paymentmode=:paymentmode, withdrawstatus=:withdrawstatus,  WHERE (mobile=:mobile OR withdrawid=:mobile)";
-          $update_user_stmt = $conn->prepare($update_user);
-          $update_user_stmt->bindValue(':mobile',$withdrawid ?? $mobile, PDO::PARAM_STR);
-          $update_user_stmt->bindValue(':userid', ($data->userid ?? $withdraw['userid']), PDO::PARAM_STR);
-          $update_user_stmt->bindValue(':remainingbalance', ($data->remainingbalance ?? $withdraw['remainingbalance']), PDO::PARAM_STR);
-          $update_user_stmt->bindValue(':withdrawamount', ($data->withdrawamount ?? $withdraw['withdrawamount']), PDO::PARAM_STR);
-          $update_user_stmt->bindValue(':paymentmode', ($data->paymentmode ?? $withdraw['paymentmode']), PDO::PARAM_STR);
-          $update_user_stmt->bindValue(':withdrawstatus', ($data->withdrawstatus ?? $withdraw['withdrawstatus']), PDO::PARAM_STR);
-          
-          if ($update_user_stmt->execute()):
-            $returnData = $error_handler->getResponse(1, 200, 'User Updated Successfully!');
-          else:
-            $returnData = $error_handler->getResponse(0, 500, 'Something went wrong. Please try again.');
-          endif;
-        endif;
+    try {
+      $withdrawl_data = "SELECT * FROM withdrawal WHERE withdrawid=:value OR mobile=:value";
+      $withdrawl_stmt = $conn->prepare($withdrawl_data);
+      $withdrawl_stmt->bindValue(':value', $withdrawid ?? $mobile, PDO::PARAM_STR);
+      $withdrawl_stmt->execute();
+      if ($withdrawl_stmt->rowCount() > 0):
+        $withdrawl = $withdrawl_stmt->fetch(PDO::FETCH_ASSOC);
+        $sql = "UPDATE withdrawal SET userid=:userid,remainingbalance=:remainingbalance, withdrawamount=:withdrawamount, paymentmode=:paymentmode, withdrawstatus=:withdrawstatus WHERE `withdrawid`=:value OR `mobile`=:value";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':value', $withdrawid ?? $mobile, PDO::PARAM_STR);
+        $stmt->bindValue(':userid', $data->userid ?? $withdrawl['userid'], PDO::PARAM_STR);
+        $stmt->bindValue(':remainingbalance', $data->remainingbalance ?? $withdrawl['remainingbalance'], PDO::PARAM_STR);
+        $stmt->bindValue(':withdrawamount', $data->withdrawamount ?? $withdrawl['withdrawamount'], PDO::PARAM_STR);
+        $stmt->bindValue(':paymentmode', $data->paymentmode ?? $withdrawl['paymentmode'], PDO::PARAM_STR);
+        $stmt->bindValue(':withdrawstatus', $data->withdrawstatus ?? $withdrawl['withdrawstatus'], PDO::PARAM_STR);
+        $stmt->execute();
+        $returnData = $error_handler->getResponse(1, 200, 'Withdrawal Updated Successfully!');
       else:
-        $returnData = $error_handler->getResponse(0, 422, 'No User Found!');
+        $returnData = $error_handler->getResponse(0, 404, 'No Data Found!');
       endif;
+    } catch (PDOException $e) {
+      $returnData = $error_handler->getResponse(0, 422, $e->getMessage());
     }
-    catch(PDOException $e){
-      $returnData = $error_handler->getResponse(0, 422,$e->getMessage());
-    }
-    
   endif;
 endif;
 
