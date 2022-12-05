@@ -56,7 +56,7 @@ else:
                 if ($check_mobile_stmt->rowCount()):
                     $returnData = $error_handler->getResponse(0, 422, 'This mobile is already in use!');
                 else:
-                    $insert_query = "INSERT INTO `users`(`name`,`email`,`mobile`,`password`, `balance`, `role`) VALUES(:name,:email,:mobile,:password, :balance, :role)";
+                    $insert_query = "INSERT INTO `users`(`name`,`email`,`mobile`,`password`, `balance`, `role` `exposer`) VALUES(:name,:email,:mobile,:password, :balance, :role,:exposer)";
                     $insert_stmt = $conn->prepare($insert_query);
                     $insert_stmt->bindValue(':name', htmlspecialchars(strip_tags($name)), PDO::PARAM_STR);
                     $insert_stmt->bindValue(':email', $email, PDO::PARAM_STR);
@@ -64,6 +64,7 @@ else:
                     $insert_stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT), PDO::PARAM_STR);
                     $insert_stmt->bindValue(':balance', 0, PDO::PARAM_INT);
                     $insert_stmt->bindValue(':role', 'user', PDO::PARAM_STR);
+                    
                     $insert_stmt->execute();
                     $returnData = $error_handler->getResponse(1, 201, 'You have successfully registered.');
                 endif;
