@@ -13,6 +13,7 @@ let wheelnumbersAC = [0, 26, 3, 35, 12, 28, 7, 29, 18, 22, 9, 31, 14, 20, 1, 33,
 
 function logout(){
 	localStorage.removeItem('session');
+	session = null;
 }
 
 if(session == null) {
