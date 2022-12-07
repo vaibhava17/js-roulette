@@ -21,20 +21,26 @@ elseif (
     !isset($data->name)
     || !isset($data->mobile)
     || !isset($data->password)
+    || !isset($data->confirm_password)
     || empty(trim($data->name))
     || empty(trim($data->mobile))
     || empty(trim($data->password))
+    || empty(trim($data->confirm_password))
 ):
-    $fields = ['fields' => ['name', 'mobile', 'password',]];
+    $fields = ['fields' => ['name', 'mobile', 'password', 'confirm_password']];
     $returnData = $error_handler->getResponse(0, 422, 'Please Fill in all Required Fields!', $fields);
 else:
     $name = trim($data->name);
     $mobile = trim($data->mobile);
     $password = trim($data->password);
-    if (strlen($mobile) > 10):
+    $confirm_password = trim($data->confirm_password);
+    // CHECKING THE MOLBILE FORMAT with regex
+    if (!preg_match('/^[6-9]\d{9}$/', $mobile) && strlen($mobile) > 10):
         $returnData = $error_handler->getResponse(0, 422, 'Invalid Mobile Number!');
-    elseif (strlen($name) < 3):
-        $returnData = $error_handler->getResponse(0, 422, 'Your name must be at least 3 characters long!');
+    elseif ($password != $confirm_password):
+        $returnData = $error_handler->getResponse(0, 422, 'Password and Confirm Password does not match!');
+    elseif (strlen($password) < 3):
+        $returnData = $error_handler->getResponse(0, 422, 'Password must be at least 3 characters long!');
     else:
         try {
             $check_mobile = "SELECT `mobile` FROM `users` WHERE `mobile`=:mobile";
