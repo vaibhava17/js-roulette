@@ -52,9 +52,16 @@ else:
                 $insert_stmt->bindValue(':balance', 0, PDO::PARAM_INT);
                 $insert_stmt->bindValue(':role', 'user', PDO::PARAM_STR);
                 $insert_stmt->bindValue(':exposer', 0, PDO::PARAM_INT);
-
                 $insert_stmt->execute();
-                $returnData = $error_handler->getResponse(1, 201, 'You have successfully registered.');
+                $user_data = [
+                    'id' => $conn->lastInsertId(),
+                    'name' => $name,
+                    'mobile' => $mobile,
+                    'balance' => 0,
+                    'role' => 'user',
+                    'exposer' => 0,
+                ];
+                $returnData = $error_handler->getResponse(1, 201, 'You have successfully registered.', array('user' => $user_data));
             endif;
         } catch (PDOException $e) {
             $returnData = $error_handler->getResponse(0, 500, $e->getMessage());
