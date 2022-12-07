@@ -8,8 +8,10 @@
   padding: 10px 0;
 }
 
-.navbar a {
+.navbar a,
+.navbar button {
   color: #fff;
+  border: 0;
   background-color: rgb(255, 21, 118);
   border-radius: 0.5rem;
   padding: 0.25rem 0.5rem;

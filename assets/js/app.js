@@ -1,4 +1,5 @@
 let session = localStorage.getItem('session');
+let nav = document.getElementById('nav');
 let bankValue = 0;
 let currentBet = 0;
 let wager = 5;
@@ -10,9 +11,14 @@ let previousNumbers = [];
 let numRed = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
 let wheelnumbersAC = [0, 26, 3, 35, 12, 28, 7, 29, 18, 22, 9, 31, 14, 20, 1, 33, 16, 24, 5, 10, 23, 8, 30, 11, 36, 13, 27, 6, 34, 17, 25, 2, 21, 4, 19, 15, 32];
 
+function logout(){
+	localStorage.removeItem('session');
+}
+
 if(session == null) {
-	let nav = document.getElementById('nav');
 	nav.innerHTML = '<a href="./template/login.html">Login</a><a href="./template/login.html">Register</a>';
+} else {
+	nav.innerHTML = '<button onclick="logout()">Logout</button>';
 }
 
 async function getBalance() {
@@ -527,10 +533,10 @@ function setBet(e, n, t, o) {
 	}
 }
 
-async function deductBalance(currentBetBalance, mobile) {
+async function deductBalance(currentBetBalance) {
 	let data = {
 		balance: currentBetBalance,
-		mobile
+		mobile: session
 	};
 
 	await axios({
@@ -541,7 +547,7 @@ async function deductBalance(currentBetBalance, mobile) {
 }
 
 function spin() {
-	deductBalance(currentBet, "9634780846");
+	deductBalance(currentBet);
 	var winningSpin = Math.floor(Math.random() * 36);
 
 	spinWheel(winningSpin);
@@ -583,9 +589,9 @@ function spin() {
 	}, 10000);
 }
 
-async function addBalance(balance, mobile) {
+async function addBalance(balance) {
 	let data = {
-		balance, mobile
+		balance, mobile: session
 	}
 	let promise
 
@@ -606,7 +612,7 @@ async function addBalance(balance, mobile) {
 //major function
 function win(winningSpin, winValue, betTotal) {
 	if (winValue > 0) {
-		addBalance(winValue + betTotal, "9634780846")
+		addBalance(winValue + betTotal)
 		console.log("winning spin ka number jo ayega wo  hai ye  " + `${winningSpin}`);
 		console.log("winning value  " + `${winValue}`);
 		console.log("bet value  " + `${betTotal}`);
