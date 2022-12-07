@@ -25,19 +25,14 @@ elseif (
     || empty(trim($data->mobile))
     || empty(trim($data->password))
 ):
-    $fields = ['fields' => ['name', 'email', 'mobile', 'password', 'confirm_password']];
+    $fields = ['fields' => ['name', 'mobile', 'password',]];
     $returnData = $error_handler->getResponse(0, 422, 'Please Fill in all Required Fields!', $fields);
 else:
     $name = trim($data->name);
-    $email = trim($data->email);
     $mobile = trim($data->mobile);
     $password = trim($data->password);
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)):
-        $returnData = $error_handler->getResponse(0, 422, 'Invalid Email Address!');
-    elseif (strlen($mobile) > 10):
+    if (strlen($mobile) > 10):
         $returnData = $error_handler->getResponse(0, 422, 'Invalid Mobile Number!');
-    elseif (strlen($password) < 8):
-        $returnData = $error_handler->getResponse(0, 422, 'Your password must be at least 8 characters long!');
     elseif (strlen($name) < 3):
         $returnData = $error_handler->getResponse(0, 422, 'Your name must be at least 3 characters long!');
     else:
@@ -49,13 +44,14 @@ else:
             if ($check_mobile_stmt->rowCount()):
                 $returnData = $error_handler->getResponse(0, 422, 'This mobile is already in use!');
             else:
-                $insert_query = "INSERT INTO `users`(`name`,`email`,`mobile`,`password`, `balance`, `role` `exposer`) VALUES(:name,:email,:mobile,:password, :balance, :role,:exposer)";
+                $insert_query = "INSERT INTO `users`(`name`,`mobile`,`password`, `balance`, `role` `exposer`) VALUES(:name,:mobile,:password, :balance, :role,:exposer)";
                 $insert_stmt = $conn->prepare($insert_query);
                 $insert_stmt->bindValue(':name', htmlspecialchars(strip_tags($name)), PDO::PARAM_STR);
                 $insert_stmt->bindValue(':mobile', $mobile, PDO::PARAM_STR);
                 $insert_stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT), PDO::PARAM_STR);
                 $insert_stmt->bindValue(':balance', 0, PDO::PARAM_INT);
                 $insert_stmt->bindValue(':role', 'user', PDO::PARAM_STR);
+                $insert_stmt->bindValue(':exposer', 0, PDO::PARAM_INT);
 
                 $insert_stmt->execute();
                 $returnData = $error_handler->getResponse(1, 201, 'You have successfully registered.');
