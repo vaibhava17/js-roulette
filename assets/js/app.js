@@ -15,6 +15,7 @@ function logout(){
 	localStorage.removeItem('session');
 	session = null;
 	nav.innerHTML = '<a href="./template/login.html">Login</a><a href="./template/login.html">Register</a>';
+	bankValue = 0;
 }
 
 if(session == null) {
