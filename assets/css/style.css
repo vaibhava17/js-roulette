@@ -881,3 +881,9 @@ body {
 }
 
 /*chip end*/
+
+/* login btn */
+
+.login-btn-home {
+	height: fit-content;
+}

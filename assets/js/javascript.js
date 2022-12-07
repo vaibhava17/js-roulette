@@ -28,7 +28,7 @@ async function login(e) {
 		}
 	}).then((res) => {
 		if (res.data.success == 1) {
-			localStorage.setItem('session', JSON.stringify(res.data.mobile));
+			localStorage.setItem('session', res.data.mobile);
 			window.location.href = window.location.origin + '/index';
 		} else {
 			alert(res.data.message);
@@ -53,7 +53,7 @@ async function register(e) {
 		}
 	}).then((res) => {
 		if (res.data.success == 1) {
-			localStorage.setItem('session', JSON.stringify(res.data.mobile));
+			localStorage.setItem('session', res.data.mobile);
 			window.location.href = window.location.origin + '/index';
 		} else {
 			alert(res.data.message);
