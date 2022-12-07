@@ -46,15 +46,15 @@ else:
                 $row = $query_stmt->fetch(PDO::FETCH_ASSOC);
                 $check_password = password_verify($password, $row['password']);
                 if ($check_password):
-                    $jwt = new JwtHandler();
-                    $token = $jwt->jwtEncodeData(
-                        array(
-                            "user_id" => $row['id'],
-                            "user_mobile" => $row['mobile'],
-                            "user_role" => $row['role']
-                        )
-                    );
-                    $returnData = $error_handler->getResponse(1, 200, 'Login Successful!', array('token' => $token));
+                    // $jwt = new JwtHandler();
+                    // $token = $jwt->jwtEncodeData(
+                    //     array(
+                    //         "user_id" => $row['id'],
+                    //         "user_mobile" => $row['mobile'],
+                    //         "user_role" => $row['role']
+                    //     )
+                    // );
+                    $returnData = $error_handler->getResponse(1, 200, 'Login Successful!', array('user' => $row));
                 else:
                     $returnData = $error_handler->getResponse(0, 422, 'Invalid Password!');
                 endif;
