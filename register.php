@@ -6,6 +6,7 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 require __DIR__ . '/classes/db.config.php';
+require __DIR__ . '/classes/jwt.handler.php';
 require __DIR__ . '/classes/error.handler.php';
 
 $db_connection = new Database();
@@ -59,16 +60,27 @@ else:
                 $insert_stmt->bindValue(':balance', 0, PDO::PARAM_INT);
                 $insert_stmt->bindValue(':role', 'user', PDO::PARAM_STR);
                 $insert_stmt->bindValue(':exposer', 0, PDO::PARAM_INT);
-                $insert_stmt->execute();
-                $user_data = [
-                    'id' => $conn->lastInsertId(),
-                    'name' => $name,
-                    'mobile' => $mobile,
-                    'balance' => 0,
-                    'role' => 'user',
-                    'exposer' => 0,
-                ];
-                $returnData = $error_handler->getResponse(1, 201, 'You have successfully registered.', array('user' => $user_data));
+                if ($insert_stmt->execute()):
+                    $jwt = new JwtHandler();
+                    $token = $jwt->jwtEncodeData(
+                        array(
+                            "user_id" => $conn->lastInsertId(),
+                            "user_mobile" => $mobile,
+                            "user_role" => 'user',
+                        )
+                    );
+                    $user_data = [
+                        'id' => $conn->lastInsertId(),
+                        'name' => $name,
+                        'mobile' => $mobile,
+                        'balance' => 0,
+                        'role' => 'user',
+                        'exposer' => 0,
+                    ];
+                    $returnData = $error_handler->getResponse(1, 201, 'You have successfully registered.', array('user' => $user_data, 'token' => $token));
+                else:
+                    $returnData = $error_handler->getResponse(0, 500, 'Something went wrong!');
+                endif;
             endif;
         } catch (PDOException $e) {
             $returnData = $error_handler->getResponse(0, 500, $e->getMessage());
