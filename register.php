@@ -35,7 +35,7 @@ else:
     $password = trim($data->password);
     $confirm_password = trim($data->confirm_password);
     // CHECKING THE MOLBILE FORMAT with regex
-    if (!preg_match('/^[6-9]\d{9}$/', $mobile) && strlen($mobile) > 10):
+    if (preg_match('/^[6-9]\d{9}$/', $mobile) == 0 && strlen($mobile) > 10):
         $returnData = $error_handler->getResponse(0, 422, 'Invalid Mobile Number!');
     elseif ($password != $confirm_password):
         $returnData = $error_handler->getResponse(0, 422, 'Password and Confirm Password does not match!');
