@@ -44,7 +44,7 @@ else:
             if ($check_mobile_stmt->rowCount()):
                 $returnData = $error_handler->getResponse(0, 422, 'This mobile is already in use!');
             else:
-                $insert_query = "INSERT INTO `users`(`name`,`mobile`,`password`, `balance`, `role` `exposer`) VALUES(:name,:mobile,:password, :balance, :role,:exposer)";
+                $insert_query = "INSERT INTO `users`(name, mobile, password, balance, role, exposer) VALUES(:name,:mobile,:password, :balance, :role,:exposer)";
                 $insert_stmt = $conn->prepare($insert_query);
                 $insert_stmt->bindValue(':name', htmlspecialchars(strip_tags($name)), PDO::PARAM_STR);
                 $insert_stmt->bindValue(':mobile', $mobile, PDO::PARAM_STR);
