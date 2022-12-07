@@ -28,8 +28,7 @@ async function login(e) {
 		}
 	}).then((res) => {
 		if (res.data.success == 1) {
-			localStorage.setItem('user', JSON.stringify(res.data.user));
-			localStorage.setItem('token', res.data.token);
+			localStorage.setItem('session', JSON.stringify(res.data.mobile));
 			window.location.href = window.location.origin + '/index';
 		} else {
 			alert(res.data.message);
@@ -54,8 +53,7 @@ async function register(e) {
 		}
 	}).then((res) => {
 		if (res.data.success == 1) {
-			localStorage.setItem('user', JSON.stringify(res.data.user));
-			localStorage.setItem('token', res.data.token);
+			localStorage.setItem('session', JSON.stringify(res.data.mobile));
 			window.location.href = window.location.origin + '/index';
 		} else {
 			alert(res.data.message);
