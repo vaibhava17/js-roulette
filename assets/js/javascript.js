@@ -17,7 +17,6 @@ $(function () {
 
 async function login(e) {
 	e.preventDefault();
-	let value;
 	let mobile = document.getElementById('mobile').value
 	let password = document.getElementById('password').value
 	await axios({
@@ -28,10 +27,13 @@ async function login(e) {
 			password: password
 		}
 	}).then((res) => {
-		value = res
-		console.log(res);
+		if (res.data.success == 1) {
+			localStorage.setItem('user', JSON.stringify(res.data.user));
+			window.location.href = window.location.origin + '/index';
+		} else {
+			alert(res.data.message);
+		}
 	});
-	return value;
 }
 
 async function register(e) {
@@ -49,8 +51,12 @@ async function register(e) {
 			password: password
 		}
 	}).then((res) => {
-		value = res
-		console.log(res);
+		if (res.data.success == 1) {
+			localStorage.setItem('user', JSON.stringify(res.data.user));
+			window.location.href = window.location.origin + '/index';
+		} else {
+			alert(res.data.message);
+		}
 	});
 	return value;
 }
