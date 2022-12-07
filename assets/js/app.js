@@ -16,6 +16,7 @@ function logout(){
 	session = null;
 	nav.innerHTML = '<a href="./template/login.html">Login</a><a href="./template/login.html">Register</a>';
 	bankValue = 0;
+	document.getElementById('bankSpan').innerText = '0';
 }
 
 if(session == null) {
