@@ -1,9 +1,10 @@
 let bankValue = 0;
+
 async function getBalance(){
 	let value = 0;
 	await axios({
     method: 'post',
-    url: 'https://game-live.fun/fetchbalance.php',
+    url: 'http://localhost/game/fetchbalance.php',
     data: {
       mobile :"9634780846"
     }
@@ -535,7 +536,7 @@ mobile};
 
 await axios({
     method: 'put',
-    url: 'https://game-live.fun/deducthbalance.php',
+    url: 'http://localhost/game/deductbalance.php',
     data: data
   }
 	)
@@ -601,7 +602,7 @@ let promise
 
 await axios({
     method: 'put',
-    url: 'https://game-live.fun/addbalance.php',
+    url: 'http://localhost/game/addbalance.php',
     data: data
   }
 	).then(res=>{
