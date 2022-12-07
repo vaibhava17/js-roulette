@@ -42,13 +42,15 @@ async function register(e) {
 	let name = document.getElementById('name').value
 	let mobile = document.getElementById('register_mobile').value
 	let password = document.getElementById('register_password').value
+	let confirm_password = document.getElementById('confirm_password').value
 	await axios({
 		method: 'post',
 		url: 'http://localhost/game/register.php',
 		data: {
 			name: name,
 			mobile: mobile,
-			password: password
+			password: password,
+			confirm_password: confirm_password
 		}
 	}).then((res) => {
 		if (res.data.success == 1) {
