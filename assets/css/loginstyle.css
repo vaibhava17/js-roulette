@@ -27,7 +27,7 @@ body {
 }
 
 .panel-login>.panel-heading a.active {
-	color: #029f5b;
+	color: #ba2f09;
 	font-size: 18px;
 }
 
@@ -64,7 +64,7 @@ body {
 }
 
 .btn-login {
-	background-color: #59B2E0;
+	background-color: #c61111;
 	outline: none;
 	color: #fff;
 	font-size: 14px;
@@ -72,14 +72,14 @@ body {
 	font-weight: normal;
 	padding: 14px 0;
 	text-transform: uppercase;
-	border-color: #59B2E6;
+	border-color: white;
 }
 
 .btn-login:hover,
 .btn-login:focus {
 	color: #fff;
-	background-color: #53A3CD;
-	border-color: #53A3CD;
+	background-color: #c61111;
+	border-color: white;
 }
 
 .forgot-password {
@@ -94,7 +94,7 @@ body {
 }
 
 .btn-register {
-	background-color: #1CB94E;
+	background-color: #c61111;
 	outline: none;
 	color: #fff;
 	font-size: 14px;
@@ -102,12 +102,12 @@ body {
 	font-weight: normal;
 	padding: 14px 0;
 	text-transform: uppercase;
-	border-color: #1CB94A;
+	border-color: #c61111;
 }
 
 .btn-register:hover,
 .btn-register:focus {
 	color: #fff;
-	background-color: #1CA347;
-	border-color: #1CA347;
+	background-color: #c61111;
+	border-color: #c61111;
 }

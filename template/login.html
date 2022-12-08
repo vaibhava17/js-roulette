@@ -14,6 +14,21 @@
     <script src="../assets/js/javascript.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
+  <script>
+    let session = localStorage.getItem('session');
+   
+
+if(session!=null){
+  window.location.href = '../index.html';
+
+
+  function preventBack() { window.history.forward(); }  
+    setTimeout("preventBack()", 0);  
+    window.onunload = function () { null };  
+
+}
+
+  </script>
   <body>
     <div class="container">
       <div class="row">

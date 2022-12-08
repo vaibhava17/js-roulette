@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<style>
+    .heading{
+        color: black;
+        text-align: center;
+        font-size: 30px;
+        margin-top:30px ;
+    }
+input[type=number], select {
+  width: 100%;
+  padding: 18px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=text], select {
+  width: 100%;
+  padding: 18px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: rgb(192, 41, 41);
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: rgb(192, 41, 41);
+}
+.info{
+    color:red;
+    font-size: 20px;
+}
+.mainContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.subContainer{
+  max-width: 800px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+  padding:10px;
+  margin-top: 20px;
+  /* background-color: #f2f2f2; */
+}
+</style>
+<body>
+
+    <script> 
+    
+    let session = localStorage.getItem('session');
+   
+
+        if(session==null){
+          window.location.href = '../index.html';
+          }
+let withdrawAmount = document.getElementById('amount').value;
+
+async function getBalance() {
+	let value = 0;
+	await axios({
+		method: 'post',
+		url: 'http://localhost/game/fetchbalance.php',
+		data: {
+			mobile: session
+		}
+	}).then((res) => {
+		value = res.data.balance;
+        console.log(value)
+        if(withdrawAmount>value)
+        {
+            alert("Insufficient Balance In Your Account To Withdraw!");
+        }
+
+	});
+	return value;
+}
+
+          </script>
+
+        
+
+
+
+    <div class="mainContainer">
+        <div class="subContainer">
+    <h3 class="heading">Withdraw Request</h3>
+  <form action="/action_page.php">
+    <label for="mnumber">Mobile Number</label>
+    <input type="number" id="mnumber" name="mobilenumber" placeholder="Mobile Number">
+    
+    <label for="amount">Amount</label>
+    <input type="number" id="amount" name="amount" placeholder="Amount">
+    
+        <label for="accountNumber">Account Number</label>
+    <input type="number" id="accountNumber" name="accountNumber" placeholder="Account Number">
+    
+       <label for="accountName">Account Name</label>
+    <input type="number" id="accountName" name="accountName" placeholder="Account Name">
+    
+       <label for="bankName">Bank Name</label>
+    <input type="text" id="bankName" name="bankName" placeholder="Bank Name">
+    <label for="ifsc">IFSC</label>
+    <input type="text" id="ifsc" name="ifsc" placeholder="IFSC">
+
+    <label for="country">Account Type/Currency</label>
+    <select id="Account Type" name="accountType">
+      <option value="Saving">Saving</option>
+      <option value="Current">Current</option>
+    </select>
+   <h1 class="info">All withdraw request will be processed on UPI NO. OR BANK ACCOUNT Within 1 Hour!</h1>
+    <input type="submit" onclick="getBalance()" value="Submit">
+  </form>
+</div>
+</div>
+
+</body>
+</html>
+
+

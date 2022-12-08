@@ -5,19 +5,22 @@
   justify-content: flex-end;
   align-items: center;
   z-index: 100;
-  padding: 10px 0;
+  padding: 3px 0;
+  border-color: white;
 }
 
 .navbar a,
 .navbar button {
   color: #fff;
   border: 0;
-  background-color: rgb(255, 21, 118);
+
+  background-color: rgb(192, 41, 41);
   border-radius: 0.5rem;
   padding: 0.25rem 0.5rem;
   text-decoration: none;
-  font-size: 1rem;    
+  font-size: 1.2rem;    
   margin: 0 10px 0 0;
   font-weight: 500;
+  font-style: bold;
   transition: all 0.3s ease;
 }

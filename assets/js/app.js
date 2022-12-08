@@ -1,3 +1,5 @@
+
+
 let session = localStorage.getItem('session');
 let nav = document.getElementById('nav');
 let bankValue = 0;
@@ -14,15 +16,18 @@ let wheelnumbersAC = [0, 26, 3, 35, 12, 28, 7, 29, 18, 22, 9, 31, 14, 20, 1, 33,
 function logout(){
 	localStorage.removeItem('session');
 	session = null;
-	nav.innerHTML = '<a href="./template/login.html">Login</a><a href="./template/login.html">Register</a>';
+	nav.innerHTML = '<a href="./template/login.html"><big><b>Login</b></big></a><a href="./template/login.html"><big><b><Register</b></big></a>';
 	bankValue = 0;
 	document.getElementById('bankSpan').innerText = '0';
 }
 
 if(session == null) {
-	nav.innerHTML = '<a href="./template/login.html">Login</a><a href="./template/login.html">Register</a>';
+	//nav.innerHTML = '<a href="./template/login.html">Login</a><a href="./template/login.html"><Register</a>';
+	nav.innerHTML = '<a href="./template/login.html"><big><b>Login</b></big></a><a href="./template/login.html"><big><b><Register</b></big></a>';
+
+	
 } else {
-	nav.innerHTML = '<button onclick="logout()">Logout</button>';
+	nav.innerHTML = '<a href="https://wa.me/91999922229"><button>Add/Deposit Money</button></a><a href="withdrawalform.html"><button>Withdraw Money</button></a><button onclick="logout()">Logout</button>';
 }
 
 async function getBalance() {
@@ -57,7 +62,7 @@ let wheel = document.getElementsByClassName('wheel')[0];
 let ballTrack = document.getElementsByClassName('ballTrack')[0];
 
 function resetGame() {
-	bankValue = 1000;
+	bankValue = 0;
 	currentBet = 0;
 	wager = 5;
 	bet = [];
@@ -175,7 +180,15 @@ function buildBettingBoard() {
 		let num = numA + ', ' + numB + ', ' + numC + ', ' + numD + ', ' + numE + ', ' + numF;
 		var objType = 'double_street';
 		ttbbetblock.onclick = function () {
+
+			if(session==null)
+{
+
+	window.location.href = './template/login.html';
+
+} else {
 			setBet(this, num, objType, 5);
+}
 		};
 		ttbbetblock.oncontextmenu = function (e) {
 			e.preventDefault();
@@ -208,7 +221,14 @@ function buildBettingBoard() {
 				}
 				var objType = (d == 3) ? 'street' : 'split';
 				var odd = (d == 3) ? 11 : 17;
+				if(session==null)
+{
+
+	window.location.href = './template/login.html';
+
+} else {
 				setBet(this, num, objType, odd);
+}
 			};
 			ttbbetblock.oncontextmenu = function (e) {
 				e.preventDefault();
@@ -245,7 +265,14 @@ function buildBettingBoard() {
 			var numB = (6 + (3 * (d - 1))) - (j - 1);
 			let num = numA + ', ' + numB;
 			rtlbb.onclick = function () {
+				if(session==null)
+{
+
+	window.location.href = './template/login.html';
+
+} else {
 				setBet(this, num, 'split', 17);
+}
 			};
 			rtlbb.oncontextmenu = function (e) {
 				e.preventDefault();
@@ -272,7 +299,14 @@ function buildBettingBoard() {
 			let num = (count >= 1 && count < 12) ? (parseInt(numA) + ((count - 1) * 3)) + ', ' + (parseInt(numB) + ((count - 1) * 3)) + ', ' + (parseInt(numC) + ((count - 1) * 3)) + ', ' + (parseInt(numD) + ((count - 1) * 3)) : ((parseInt(numA) - 1) + ((count - 12) * 3)) + ', ' + ((parseInt(numB) - 1) + ((count - 12) * 3)) + ', ' + ((parseInt(numC) - 1) + ((count - 12) * 3)) + ', ' + ((parseInt(numD) - 1) + ((count - 12) * 3));
 			var objType = 'corner_bet';
 			cbbb.onclick = function () {
+				if(session==null)
+{
+
+	window.location.href = './template/login.html';
+
+} else {
 				setBet(this, num, objType, 8);
+}
 			};
 			cbbb.oncontextmenu = function (e) {
 				e.preventDefault();
@@ -295,7 +329,14 @@ function buildBettingBoard() {
 		let num = (f == 0) ? '1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18' : '19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36';
 		var objType = (f == 0) ? 'outside_low' : 'outside_high';
 		bbtoptwo.onclick = function () {
+			if(session==null)
+{
+
+	window.location.href = './template/login.html';
+
+} else {
 			setBet(this, num, objType, 1);
+}
 		};
 		bbtoptwo.oncontextmenu = function (e) {
 			e.preventDefault();
@@ -314,7 +355,14 @@ function buildBettingBoard() {
 	var objType = 'zero';
 	var odds = 35;
 	zero.onclick = function () {
+		if(session==null)
+{
+
+	window.location.href = './template/login.html';
+
+} else {
 		setBet(this, '0', objType, odds);
+}
 	};
 	zero.oncontextmenu = function (e) {
 		e.preventDefault();
@@ -336,10 +384,25 @@ function buildBettingBoard() {
 		numberBlock.setAttribute('class', nbClass + colourClass);
 		numberBlock.onclick = function () {
 			if (numberBlocks[a] != '2 to 1') {
+				if(session==null)
+{
+
+	window.location.href = './template/login.html';
+
+} else {
 				setBet(this, '' + numberBlocks[a] + '', 'inside_whole', 35);
+}
 			} else {
 				num = (a == 12) ? '3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36' : ((a == 25) ? '2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35' : '1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34');
+				
+				if(session==null)
+{
+
+	window.location.href = './template/login.html';
+
+} else {
 				setBet(this, num, 'outside_column', 2);
+}
 			}
 		};
 		numberBlock.oncontextmenu = function (e) {
@@ -368,7 +431,14 @@ function buildBettingBoard() {
 		bo3Block.setAttribute('class', 'bo3_block');
 		bo3Block.onclick = function () {
 			num = (b == 0) ? '1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12' : ((b == 1) ? '13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24' : '25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36');
+			if(session==null)
+{
+
+	window.location.href = './template/login.html';
+
+} else {
 			setBet(this, num, 'outside_dozen', 2);
+}
 		};
 		bo3Block.oncontextmenu = function (e) {
 			e.preventDefault();
@@ -390,7 +460,15 @@ function buildBettingBoard() {
 		otoBlock.setAttribute('class', 'oto_block' + colourClass);
 		otoBlock.onclick = function () {
 			num = (d == 0) ? '2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36' : ((d == 1) ? '1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36' : ((d == 2) ? '2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35' : '1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35'));
+			
+			if(session==null)
+{
+
+	window.location.href = './template/login.html';
+
+} else {
 			setBet(this, num, 'outside_oerb', 1);
+}
 		};
 		otoBlock.oncontextmenu = function (e) {
 			num = (d == 0) ? '2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36' : ((d == 1) ? '1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36' : ((d == 2) ? '2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35' : '1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35'));
@@ -404,7 +482,7 @@ function buildBettingBoard() {
 
 	let chipDeck = document.createElement('div');
 	chipDeck.setAttribute('class', 'chipDeck');
-	let chipValues = [1, 5, 10, 100, 'clear'];
+	let chipValues = [5, 10, 100, 1000, 'clear'];
 	for (i = 0; i < chipValues.length; i++) {
 		let cvi = i;
 		let chipColour = (i == 0) ? 'red' : ((i == 1) ? 'blue cdChipActive' : ((i == 2) ? 'orange' : ((i == 3) ? 'gold' : 'clearBet')));
@@ -477,6 +555,9 @@ function clearBet() {
 	numbersBet = [];
 }
 
+
+
+
 function setBet(e, n, t, o) {
 	lastWager = wager;
 	wager = (bankValue < wager) ? bankValue : wager;
@@ -537,6 +618,7 @@ function setBet(e, n, t, o) {
 	}
 }
 
+
 async function deductBalance(currentBetBalance) {
 	let data = {
 		balance: currentBetBalance,
@@ -549,6 +631,8 @@ async function deductBalance(currentBetBalance) {
 		data: data
 	});
 }
+
+
 
 function spin() {
 	deductBalance(currentBet);
