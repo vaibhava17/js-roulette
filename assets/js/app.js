@@ -49,7 +49,7 @@ async function getBalance(mobile) {
 	let value = 0;
 	await axios({
 		method: 'post',
-		url: 'http://localhost/apps/game-live-app/fetchbalance.php',
+		url: 'https://game-live.fun/fetchbalance.php',
 		data: {
 			mobile: session || mobile
 		}
@@ -604,7 +604,7 @@ async function deductBalance(currentBetBalance) {
 	};
 	await axios({
 		method: 'post',
-		url: 'http://localhost/apps/game-live-app/deductbalance.php',
+		url: 'https://game-live.fun/deductbalance.php',
 		data: data
 	}).then(res => {
 		if (res.data.success == 1) {
@@ -664,7 +664,7 @@ async function addBalance(balance) {
 
 	await axios({
 		method: 'put',
-		url: 'http://localhost/apps/game-live-app/addbalance.php',
+		url: 'https://game-live.fun/addbalance.php',
 		data: data
 	}).then(res => {
 		console.log(res)
@@ -823,7 +823,7 @@ async function login(e) {
 	let password = document.getElementById('password').value
 	await axios({
 		method: 'post',
-		url: 'http://localhost/apps/game-live-app/login.php',
+		url: 'https://game-live.fun/login.php',
 		data: {
 			mobile: mobile,
 			password: password
@@ -873,7 +873,7 @@ async function register(e) {
 	let confirm_password = document.getElementById('confirm_password').value
 	await axios({
 		method: 'post',
-		url: 'http://localhost/apps/game-live-app/register.php',
+		url: 'https://game-live.fun/register.php',
 		data: {
 			name: name,
 			mobile: mobile,
@@ -931,7 +931,7 @@ async function withdrawal(e) {
 	let accounttype = document.getElementById('account_type').value
 	await axios({
 		method: 'post',
-		url: 'http://localhost/apps/game-live-app/withdrawal_insert.php',
+		url: 'https://game-live.fun/withdrawal_insert.php',
 		data: {
 			userid: session,
 			withdrawamount: amount,
