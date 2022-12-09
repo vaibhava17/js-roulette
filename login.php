@@ -32,10 +32,11 @@ else:
     $password = trim($data->password);
 
     // CHECKING THE MOLBILE FORMAT (IF INVALID FORMAT)
-    if (strlen($mobile) > 10):
-        $returnData = $error_handler->getResponse(0, 422, 'Invalid Mobile Address!');
-    elseif (strlen($password) < 8):
-        $returnData = $error_handler->getResponse(0, 422, 'Your password must be at least 8 characters long!');
+    $pattern = '/^[6-9]\d{9}$/';
+    if (preg_match($pattern, $mobile) == 0):
+        $returnData = $error_handler->getResponse(0, 422, 'Invalid Mobile Number!');
+    elseif (strlen($password) < 3):
+        $returnData = $error_handler->getResponse(0, 422, 'Your password must be at least 3 characters long!');
     else:
         try {
             $fetch_user_by_mobile = "SELECT * FROM `users` WHERE `mobile`=:mobile";

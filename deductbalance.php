@@ -1,7 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: access");
-header("Access-Control-Allow-Methods: PUT");
+header("Access-Control-Allow-Methods: POST");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 require __DIR__ . '/classes/db.config.php';
@@ -14,7 +14,7 @@ $error_handler = new ErrorHandler();
 $data = json_decode(file_get_contents("php://input"));
 $returnData = [];
 
-if ($_SERVER["REQUEST_METHOD"] != "PUT"):
+if ($_SERVER["REQUEST_METHOD"] != "POST"):
   $returnData = $error_handler->getResponse(0, 404, 'Page Not Found!');
 elseif (empty($data) || !isset($data->mobile) || empty(trim($data->mobile))):
   $returnData = $error_handler->getResponse(0, 422, 'Mobile number is required!');

@@ -19,7 +19,8 @@ $returnData = [];
 if ($_SERVER["REQUEST_METHOD"] != "POST"):
     $returnData = $error_handler->getResponse(0, 404, 'Page Not Found!');
 elseif (
-    !isset($data->name)
+    empty($data)
+    || !isset($data->name)
     || !isset($data->mobile)
     || !isset($data->password)
     || !isset($data->confirm_password)

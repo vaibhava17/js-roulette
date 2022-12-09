@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <title>Javascript Roulette</title>
+  <title>Roulette</title>
   <meta name="title" content="Roulette" />
   <meta
     name="description"
@@ -14,13 +14,289 @@
     property="og:description"
     content="A fully functioning roulette game made using Javascript and CSS"
   />
+  <!-- Main CSS -->
   <link href="./assets/css/style.css" rel="stylesheet" type="text/css" />
-  <link href="./assets/css/nav-style.css" rel="stylesheet" type="text/css" />
+
+  <!-- Navbar CSS -->
+  <link href="./assets/css/navbar.css" rel="stylesheet" type="text/css" />
+
+  <!-- Modal CSS -->
+  <link href="./assets/css/modal.css" rel="stylesheet" type="text/css" />
+
+  <!-- Login/Register Form CSS -->
+  <link rel="stylesheet" href="./assets/css/login.css" />
+
+  <!-- AXIOS -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
+  <nav class="navbar" id="nav">
+    <button id="login-btn">
+      <big><b>Login</b></big>
+    </button>
+    <button id="register-btn">
+      <big><b>Register</b></big>
+    </button>
+    <a href="https://wa.me/91999922229" target="_blank" id="add-btn">
+      <big><b>Add/Deposit Money</b></big>
+    </a>
+    <button id="withdrawal-btn">
+      <big><b>Withdraw Money</b></big>
+    </button>
+    <button onclick="logout()" id="logout-btn">
+      <big><b>Logout</b></big>
+    </button>
+  </nav>
+  <!-- login modal -->
+  <div id="login-modal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="login-close">&times;</span>
+      <div>
+        <div class="panel panel-login">
+          <div class="panel-heading">LOGIN</div>
+          <div class="panel-body">
+            <form id="login-form" style="display: block">
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="mobile"
+                  id="mobile"
+                  tabindex="1"
+                  class="form-control"
+                  placeholder="mobile"
+                  value="8958119121"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  tabindex="2"
+                  class="form-control"
+                  placeholder="Password"
+                  value="Akshat@12345"
+                />
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-6 col-sm-offset-3">
+                    <button
+                      name="login-submit"
+                      id="login-submit"
+                      tabindex="4"
+                      class="form-control btn btn-login"
+                      type="submit"
+                      onclick="login(event)"
+                    >
+                      Login
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="text-center">
+                      <a href="" tabindex="5" class="forgot-password"
+                        >Forgot Password?</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- login modal end -->
+  <!-- register modal -->
+  <div id="register-modal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="register-close">&times;</span>
+      <div>
+        <div class="panel panel-login">
+          <div class="panel-heading">REGISTER</div>
+          <div class="panel-body">
+            <form id="register-form" style="display: block">
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  tabindex="1"
+                  class="form-control"
+                  placeholder="Name"
+                  value=""
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="mobile"
+                  id="register_mobile"
+                  tabindex="1"
+                  class="form-control"
+                  placeholder="Enter Mobile"
+                  value=""
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="password"
+                  name="password"
+                  id="register_password"
+                  tabindex="2"
+                  class="form-control"
+                  placeholder="Enter Password"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="password"
+                  name="confirm_password"
+                  id="confirm_password"
+                  tabindex="2"
+                  class="form-control"
+                  placeholder="Enter Confirm Password"
+                />
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-6 col-sm-offset-3">
+                    <button
+                      type="submit"
+                      name="register-submit"
+                      id="register-submit"
+                      tabindex="4"
+                      class="form-control btn btn-register"
+                      onclick="register(event)"
+                    >
+                      Register
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- register modal end -->
+  <!-- withdrawal modal -->
+  <div id="withdrawal-modal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="withdrawal-close">&times;</span>
+      <div>
+        <div class="panel panel-login">
+          <div class="panel-heading">WITHDRAWAL REQUEST</div>
+          <div class="panel-body">
+            <form id="withdrawal-form" style="display: block">
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="mobile"
+                  id="withdrawal_mobile"
+                  tabindex="1"
+                  class="form-control"
+                  placeholder="Enter Mobile"
+                  value=""
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="accountname"
+                  id="account_name"
+                  tabindex="2"
+                  class="form-control"
+                  placeholder="Enter Account Holder Name"
+                  value=""
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="accountnumber"
+                  id="account_number"
+                  tabindex="2"
+                  class="form-control"
+                  placeholder="Enter Account Number"
+                  value=""
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="bankname"
+                  id="bank_name"
+                  tabindex="3"
+                  class="form-control"
+                  placeholder="Enter Bank Name"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="ifsc"
+                  id="ifsc_code"
+                  tabindex="4"
+                  class="form-control"
+                  placeholder="Enter IFSC Code"
+                />
+              </div>
+              <div class="form-group">
+                <select
+                  name="accounttype"
+                  id="account_type"
+                  class="form-control"
+                  tabindex="5"
+                >
+                  <option value="">Select Account Type</option>
+                  <option value="Savings">Savings</option>
+                  <option value="Current">Current</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="amount"
+                  id="withdrawal_amount"
+                  tabindex="6"
+                  class="form-control"
+                  placeholder="Enter Amount"
+                />
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-6 col-sm-offset-3">
+                    <button
+                      type="submit"
+                      name="withdrawal-submit"
+                      id="withdrawal-submit"
+                      tabindex="4"
+                      class="form-control btn btn-register"
+                      onclick="withdrawal(event)"
+                    >
+                      Withdrawal
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- withdrawal modal end -->
 
-  <nav class="navbar" id="nav"></nav>
-  <input type="button" name="button" value="">
+  <!-- Main JS -->
   <script src="./assets/js/app.js"></script>
 </body>
