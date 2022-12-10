@@ -2,6 +2,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <title>Roulette</title>
+  <link rel="stylesheet" href="popUp.css">
   <meta name="title" content="Roulette" />
   <meta
     name="description"
@@ -16,6 +17,9 @@
   />
   <!-- Main CSS -->
   <link href="./assets/css/style.css" rel="stylesheet" type="text/css" />
+<!-- popUpcss -->
+  <link href="./assets/css/popUp.css" rel="stylesheet" type="text/css" />
+
 
   <!-- Navbar CSS -->
   <link href="./assets/css/navbar.css" rel="stylesheet" type="text/css" />
@@ -29,10 +33,11 @@
   content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"> -->
   <!-- AXIOS -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
   <style>
     /* @media only screen and (orientation:portrait){
       body{
-        height: 100%;
+        height: 50vh;
         width: 100%;
         transform: rotate(90deg);
       }
@@ -296,6 +301,7 @@
                     >
                       Withdrawal
                     </button>
+                    <a href="/assets/withdraw.html">For withdraw history</a>
                   </div>
                 </div>
               </div>
@@ -306,7 +312,18 @@
     </div>
   </div>
   <!-- withdrawal modal end -->
-
+  <!-- popup -->
+  <div class="popup">
+    <h2>Welcome to Biggest Gaming World</h2>
+    <p>
+      For best experience please view in <bold>Landscape mode</bold>
+    </p>
+    <button id="close">Let's Go</button>
+</div>
+<!-- popUp ends -->
   <!-- Main JS -->
   <script src="./assets/js/app.js"></script>
+  <script src="./assets/js/popUp.js"></script>
+
+
 </body>
