@@ -11,6 +11,16 @@ var registerBtn = document.getElementById("register-btn");
 var addBtn = document.getElementById("add-btn");
 var logoutBtn = document.getElementById("logout-btn");
 
+// if(screen.availHeight > screen.availWidth){
+//     alert("Please use Landscape!");
+// }
+
+function isPortrait() {
+    return window.innerHeight > window.innerWidth;
+}
+if (isPortrait()) {
+    alert("This page is best viewed in landscape mode");
+}
 function toggleBtns() {
 	if (session) {
 		withdrawalBtn.style.display = "block";
