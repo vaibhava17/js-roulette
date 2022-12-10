@@ -9,12 +9,14 @@ var logoutBtn = document.getElementById("logout-btn");
 //     alert("Please use Landscape!");
 // }
 
-function isPortrait() {
-    return window.innerHeight > window.innerWidth;
-}
-if (isPortrait()) {
-    alert("This page is best viewed in landscape mode");
-}
+// function isPortrait() {
+//     return window.innerHeight > window.innerWidth;
+// }
+// if (isPortrait()) {
+//     alert("This page is best viewed in landscape mode");
+// }
+// alert("Please view in landscape mode for best experience");
+// window.alert("Please view in landscape mode for best experience");
 function toggleBtns() {
 	if (session) {
 		withdrawalBtn.style.display = "block";
