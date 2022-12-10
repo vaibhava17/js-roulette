@@ -1,7 +1,7 @@
 const env = {
-  // apiUrl: 'https://game-live.fun',
+   apiUrl: 'https://game-live.fun',
   // apiUrl: 'http://localhost/apps/game-live-app',
-  apiUrl: 'http://localhost/game',
+  // apiUrl: 'http://localhost/game',
 }
 
 let session = localStorage.getItem('session');
@@ -29,16 +29,16 @@ async function withdraw() {
                 <th>${item.withdrawid}</th>
                 <th>${item.userid}</th>
                 <th>${item.withdrawreqtime}</th>
-                <th>Remaining Balance</th>
-                <th>Withdraw Amount</th>
-                <th>Number</th>
-                <th>Payment Mode</th>
-                <th>Withdraw Status</th>
-                <th>Account Number</th>
-                <th>Account Name</th>
-                <th>Bank Name</th>
-                <th>IFSC</th>
-                <th>Account Type</th>
+                <th>${item.remainingbalance}</th>
+                <th>${item.withdrawamount}</th>
+                <th>${item.mobile}</th>
+                <th>${item.paymentmode}</th>
+                <th>${item.withdrawstatus}</th>
+                <th>${item.accountnumber}</th>
+                <th>${item.accountname}</th>
+                <th>${item.bankname}</th>
+                <th>${item.ifsc}</th>
+                <th>${item.acounttype}</th>
               </tr>
             `
           )

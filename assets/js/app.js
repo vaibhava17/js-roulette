@@ -1,7 +1,7 @@
 const env = {
-	// apiUrl: 'https://game-live.fun',
+	 apiUrl: 'https://game-live.fun',
 	// apiUrl: 'http://localhost/apps/game-live-app',
-	apiUrl: 'http://localhost/game',
+	// apiUrl: 'http://localhost/game',
 }
 
 let session = localStorage.getItem('session');
