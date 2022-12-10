@@ -11,6 +11,7 @@ var registerBtn = document.getElementById("register-btn");
 var addBtn = document.getElementById("add-btn");
 var logoutBtn = document.getElementById("logout-btn");
 
+
 function toggleBtns() {
 	if (session) {
 		withdrawalBtn.style.display = "block";
@@ -829,6 +830,8 @@ async function login(e) {
 	let password = document.getElementById('password').value
 	await axios({
 		method: 'post',
+		// url: `${env.apiUrl}/login.php`,
+		
 		url: `${env.apiUrl}/login.php`,
 		data: {
 			mobile: mobile,
@@ -837,14 +840,41 @@ async function login(e) {
 	}).then((res) => {
 		if (res.data.success == 1) {
 			session = res.data.mobile;
+			
 			localStorage.setItem('session', res.data.mobile);
 			getBalance(res.data.mobile);
+			// addToken(res.data.token);
 			toggleBtns();
+			
 		} else {
 			alert(res.data.message);
 		}
 		closeLoginModal();
 	});
+}
+
+
+async function addToken(token)
+{
+
+	localStorage.setItem('token', token);
+
+	let data = {
+		token: token,
+		mobile: session,
+	}
+
+
+	await axios({
+		method: 'put',
+		url: `${env.apiUrl}/updateToken.php`,
+		data: data
+	}).then(res => {
+		console.log(res)
+	
+	
+	})
+
 }
 
 // register modal
