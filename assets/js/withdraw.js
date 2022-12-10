@@ -38,7 +38,7 @@ async function withdraw() {
                 <th>${item.accountname}</th>
                 <th>${item.bankname}</th>
                 <th>${item.ifsc}</th>
-                <th>${item.acounttype}</th>
+                <th>${item.accounttype}</th>
               </tr>
             `
           )
