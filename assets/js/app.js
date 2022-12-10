@@ -1,7 +1,7 @@
 const env = {
-	apiUrl: 'https://game-live.fun',
-	// apiUrl: 'http://localhost:3000/apps/game-live-app',
-	// apiUrl: 'http://localhost:3000/game',
+	// apiUrl: 'https://game-live.fun',
+	// apiUrl: 'http://localhost/apps/game-live-app',
+	apiUrl: 'http://localhost/game',
 }
 
 let session = localStorage.getItem('session');
@@ -11,18 +11,6 @@ var registerBtn = document.getElementById("register-btn");
 var addBtn = document.getElementById("add-btn");
 var logoutBtn = document.getElementById("logout-btn");
 
-// if(screen.availHeight > screen.availWidth){
-//     alert("Please use Landscape!");
-// }
-
-// function isPortrait() {
-//     return window.innerHeight > window.innerWidth;
-// }
-// if (isPortrait()) {
-//     alert("This page is best viewed in landscape mode");
-// }
-// alert("Please view in landscape mode for best experience");
-// window.alert("Please view in landscape mode for best experience");
 function toggleBtns() {
 	if (session) {
 		withdrawalBtn.style.display = "block";
@@ -936,6 +924,7 @@ window.onclick = function (event) {
 	}
 }
 
+let messageSpan = document.getElementById("alert-message");
 
 // withdrawal function
 async function withdrawal(e) {
@@ -947,6 +936,12 @@ async function withdrawal(e) {
 	let bankname = document.getElementById('bank_name').value
 	let ifsc = document.getElementById('ifsc_code').value
 	let accounttype = document.getElementById('account_type').value
+	if (parseInt(amount) < 100) {
+		messageSpan.innerHTML = `Can not withdraw amount less then Rs 100`;
+		return
+	} else {
+		messageSpan.innerHTML = "";
+	}
 	await axios({
 		method: 'post',
 		url: `${env.apiUrl}/withdrawal_insert.php`,

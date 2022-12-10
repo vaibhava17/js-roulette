@@ -2,7 +2,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <title>Roulette</title>
-  <link rel="stylesheet" href="popUp.css">
+  <link rel="stylesheet" href="popUp.css" />
   <meta name="title" content="Roulette" />
   <meta
     name="description"
@@ -17,9 +17,8 @@
   />
   <!-- Main CSS -->
   <link href="./assets/css/style.css" rel="stylesheet" type="text/css" />
-<!-- popUpcss -->
+  <!-- popUpcss -->
   <link href="./assets/css/popUp.css" rel="stylesheet" type="text/css" />
-
 
   <!-- Navbar CSS -->
   <link href="./assets/css/navbar.css" rel="stylesheet" type="text/css" />
@@ -280,7 +279,7 @@
               </div>
               <div class="form-group">
                 <input
-                  type="text"
+                  type="number"
                   name="amount"
                   id="withdrawal_amount"
                   tabindex="6"
@@ -288,6 +287,7 @@
                   placeholder="Enter Amount"
                 />
               </div>
+              <span id="alert-message"></span>
               <div class="form-group">
                 <div class="row">
                   <div class="col-sm-6 col-sm-offset-3">
@@ -301,7 +301,7 @@
                     >
                       Withdrawal
                     </button>
-                    <a href="/assets/withdraw.html">For withdraw history</a>
+                    <a href="./withdraw.html">For withdraw history</a>
                   </div>
                 </div>
               </div>
@@ -315,15 +315,11 @@
   <!-- popup -->
   <div class="popup">
     <h2>Welcome to Biggest Gaming World</h2>
-    <p>
-      For best experience please view in <bold>Landscape mode</bold>
-    </p>
+    <p>For best experience please view in <bold>Landscape mode</bold></p>
     <button id="close">Let's Go</button>
-</div>
-<!-- popUp ends -->
+  </div>
+  <!-- popUp ends -->
   <!-- Main JS -->
   <script src="./assets/js/app.js"></script>
   <script src="./assets/js/popUp.js"></script>
-
-
 </body>

@@ -1,91 +1,37 @@
 <!DOCTYPE html>
-<head>
-    <head>
-        
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<style>
-    .heading{
-        color: black;
-        text-align: center;
-        font-size: 30px;
-        margin-top:30px ;
-    }
-.info{
-    color:red;
-    font-size: 20px;
-}
-.mainContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-}
-.subContainer{
-  max-width: 800px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
-  padding:10px;
-  margin-top: 20px;
-  /* background-color: #f2f2f2; */
-}
-</style>
-<script href="./assets/js/withdraw.js">let session = localStorage.getItem('session');
-    async function withdraw(mobile) {
-        let value = 0;
-        await axios({
-            method: 'post',
-            url: 'http://localhost/game/withdrawal_fetch.php',
-            data: {
-                mobile: session || mobile
-            }
-        }).then((res) => {
-            console.log(res)
-            console.log(res.data.remainingbalance)
-            console.log(res.data.withdrawamount)
-            console.log(res.data.userid)
-            
-        });
-    
-       
-      }
-
-    
-    if (session != null) {
-        withdraw();
-    }</script>
-</head>
-<body>
-
-      
-         <div class="container">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Withdraw ID   </th>
-                  <th>User ID</th>
-                  <th>Time</th>
-                  <th>Remaining Balance </th>
-                  <th>Withdraw Amount</th>
-                  <th>Number</th>
-                  <th>Payment Mode</th>
-                  <th>Withdraw Status</th>
-                  <th>Account Number</th>
-                  <th>Account Name </th>
-                  <th>Bank Name </th>
-                  <th>IFSC</th>
-                  <th>Account Type</th>
-                </tr>
-              </thead>
-              <tbody id="data">
-          
-              </tbody>
-            </table>
-          </div>
-
- 
-        
-    
-
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/withdrawal.css" />
+    <!-- AXIOS -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Withdraw ID</th>
+            <th>User ID</th>
+            <th>Time</th>
+            <th>Remaining Balance</th>
+            <th>Withdraw Amount</th>
+            <th>Number</th>
+            <th>Payment Mode</th>
+            <th>Withdraw Status</th>
+            <th>Account Number</th>
+            <th>Account Name</th>
+            <th>Bank Name</th>
+            <th>IFSC</th>
+            <th>Account Type</th>
+          </tr>
+        </thead>
+        <tbody id="withdraw-history"></tbody>
+      </table>
+    </div>
+  </body>
+  <script src="./assets/js/withdraw.js"></script>
 </html>
-
-
