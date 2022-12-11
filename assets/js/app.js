@@ -1,5 +1,5 @@
 const env = {
-	 apiUrl: 'https://game-live.fun',
+	 apiUrl: 'https://newkhel.in',
 	// apiUrl: 'http://localhost/apps/game-live-app',
 	// apiUrl: 'http://localhost/game',
 }
