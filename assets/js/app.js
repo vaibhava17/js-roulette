@@ -907,14 +907,14 @@ if(session!=null)
 		mobile: session,
 	}
 
-
+	console.log(" token stored in localstorage :  "+tokenOfLogin+" token stored in database : ");
 	await axios({
 		method: 'post',
 		url: `${env.apiUrl}/fetchToken.php`,
 		data: data
 	}).then(res => {
 	
-		console.log(" token stored in localstorage :  "+tokenOfLogin+" token stored in database : "+  res.data.token);
+	
 		if(res.data.token!=tokenOfLogin)
 		{
 
