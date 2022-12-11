@@ -898,9 +898,9 @@ if(session!=null)
 	async function fetchToken()
 {
 
-	let tokenInLocalStr = localStorage.getItem('token');
+	// let tokenInLocalStr = localStorage.getItem('token');
 
-	console.log(tokenInLocalStr);
+	// console.log(tokenInLocalStr);
 
 	
 	
@@ -918,19 +918,19 @@ if(session!=null)
 		data: data
 	}).then(res => {
 	
-		console.log(" token stored in localstorage :  "+tokenInLocalStr+" token stored in database : "+  res.data.token);
-		if(res.data.token!=tokenOfLocalStr)
-		{
+		console.log(" token stored in database : "+  res.data.token);
+		// if(res.data.token!=tokenOfLocalStr)
+		// {
 
 			
-			logout();
-		}
+		// 	logout();
+		// }
 	
 	})
 }
 
 
-console.log(" token stored in localstorage :  "+tokenInLocalStr+" token stored in database : ");
+// console.log(" token stored in localstorage :  "+tokenInLocalStr+" token stored in database : ");
 
 }
   }, 5000);
