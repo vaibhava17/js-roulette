@@ -847,7 +847,11 @@ async function login(e) {
 			session = res.data.mobile;
 			
 			localStorage.setItem('session', res.data.mobile);
+
+			
 			localStorage.setItem('token', res.data.token);
+
+
 			
 			getBalance(res.data.mobile);
 			addToken(res.data.token);
@@ -866,7 +870,6 @@ async function login(e) {
 async function addToken(token)
 {
 
-	localStorage.setItem('token', token);
 
 	let data = {
 		token: token,
@@ -892,15 +895,16 @@ var intervalId = window.setInterval(function(){
 
 if(session!=null)
 {
-	async function fetchToken(mobile)
+	async function fetchToken()
 {
 
-	let tokenOfLogin = localStorage.getItem('token');
+	let tokenInLocalStr = localStorage.getItem('token');
+
+	console.log(tokenInLocalStr);
 
 	
 	
 
-	alert(tokenOfLogin);
 
 	let data = {
 	
@@ -914,8 +918,8 @@ if(session!=null)
 		data: data
 	}).then(res => {
 	
-		console.log(" token stored in localstorage :  "+tokenOfLogin+" token stored in database : "+  res.data.token);
-		if(res.data.token!=tokenOfLogin)
+		console.log(" token stored in localstorage :  "+tokenInLocalStr+" token stored in database : "+  res.data.token);
+		if(res.data.token!=tokenOfLocalStr)
 		{
 
 			
@@ -926,7 +930,7 @@ if(session!=null)
 }
 
 
-console.log(" token stored in localstorage :  "+tokenOfLogin+" token stored in database : ");
+console.log(" token stored in localstorage :  "+tokenInLocalStr+" token stored in database : ");
 
 }
   }, 5000);
