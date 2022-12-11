@@ -99,6 +99,8 @@
 	padding: 14px 0;
 	text-transform: uppercase;
 	border-color: #c61111;
+	border:5px solid white;
+
 }
 
 .btn-register:hover,
@@ -127,10 +129,40 @@ input[type=number], select {
 	border-radius: 4px;
 	box-sizing: border-box;
   }
+  input[type=password], select {
+	width: 100%;
+	padding: 18px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+  }
   
   #withdrawal-submit{
 	width: 100%;
-	background-color: #4CAF50;
+	background-color: rgb(192, 41, 41);
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	border:1.5px solid white;
+  }
+  #login-submit{
+	width: 100%;
+	background-color: rgb(192, 41, 41);
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+  }
+  #register-submit{
+	width: 100%;
+	background-color: rgb(192, 41, 41);
 	color: white;
 	padding: 14px 20px;
 	margin: 8px 0;
@@ -140,5 +172,5 @@ input[type=number], select {
   }
   
   #withdrawal-submit:hover {
-	background-color: #45a049;
+	background-color: rgb(192, 41, 41);
   }

@@ -1,7 +1,7 @@
 const env = {
-	 apiUrl: 'https://newkhel.in',
+//	 apiUrl: 'https://newkhel.in',
 	// apiUrl: 'http://localhost/apps/game-live-app',
-	// apiUrl: 'http://localhost/game',
+	 apiUrl: 'http://localhost/game',
 }
 
 let session = localStorage.getItem('session');
@@ -10,6 +10,8 @@ var loginBtn = document.getElementById("login-btn");
 var registerBtn = document.getElementById("register-btn");
 var addBtn = document.getElementById("add-btn");
 var logoutBtn = document.getElementById("logout-btn");
+
+var audio = new Audio("./audio.mp3");
 
 
 function toggleBtns() {
@@ -565,6 +567,7 @@ function setBet(e, n, t, o) {
 			spinBtn.onclick = function () {
 				this.remove();
 				spin();
+				audio.play()
 			};
 			container.append(spinBtn);
 		}

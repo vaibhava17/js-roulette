@@ -307,12 +307,12 @@ body {
 
 .spinBtn {
 	position: absolute;
-	margin-top: 329px;
+	margin-top: 309px;
 	margin-left: -392px;
-	font-size: 15px;
+	font-size: 20px;
 	cursor: pointer;
 	background-color: #ffec00;
-	padding: 10px 5px;
+	padding: 20px 12px;
 	border-radius: 100%;
 	color: #000;
 	font-weight: bold;
