@@ -494,15 +494,17 @@ function buildBettingBoard() {
 				}
 				wager = parseInt(chip.childNodes[0].innerText);
 			} else {
+
+if(currentBet!=0)
+{
+
 				bankValue = bankValue + currentBet;
 				currentBet = 0;
 				document.getElementById('bankSpan').innerText = '' + bankValue.toLocaleString("en-GB") + '';
 				document.getElementById('betSpan').innerText = '' + currentBet.toLocaleString("en-GB") + '';
-				if(currentBet<bankValue)
-				{
 				clearBet();
 				removeChips();
-				}
+}
 			}
 		};
 		let chipSpan = document.createElement('span');
