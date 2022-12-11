@@ -58,7 +58,7 @@ else:
                 $insert_stmt->bindValue(':name', htmlspecialchars(strip_tags($name)), PDO::PARAM_STR);
                 $insert_stmt->bindValue(':mobile', $mobile, PDO::PARAM_STR);
                 $insert_stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT), PDO::PARAM_STR);
-                $insert_stmt->bindValue(':balance', 0, PDO::PARAM_INT);
+                $insert_stmt->bindValue(':balance', 10, PDO::PARAM_INT);
                 $insert_stmt->bindValue(':role', 'user', PDO::PARAM_STR);
                 $insert_stmt->bindValue(':exposer', 0, PDO::PARAM_INT);
                 if ($insert_stmt->execute()):
