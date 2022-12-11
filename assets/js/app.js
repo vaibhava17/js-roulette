@@ -44,10 +44,15 @@ let wheelnumbersAC = [0, 26, 3, 35, 12, 28, 7, 29, 18, 22, 9, 31, 14, 20, 1, 33,
 
 
 function logout() {
+	clearInterval(intervalId);
 	localStorage.removeItem('session');
+	localStorage.removeItem('token');
 	session = null;
+
 	bankValue = 0;
 	document.getElementById('bankSpan').innerText = '0';
+
+	window.location.href = `${env.apiUrl}/index.html`;
 	toggleBtns();
 }
 
@@ -842,8 +847,12 @@ async function login(e) {
 			session = res.data.mobile;
 			
 			localStorage.setItem('session', res.data.mobile);
+			localStorage.setItem('token', res.data.token);
+			
 			getBalance(res.data.mobile);
-			// addToken(res.data.token);
+			addToken(res.data.token);
+
+			// alert(res.data.token);
 			toggleBtns();
 			
 		} else {
@@ -870,12 +879,52 @@ async function addToken(token)
 		url: `${env.apiUrl}/updateToken.php`,
 		data: data
 	}).then(res => {
+
+		
 		console.log(res)
 	
 	
 	})
 
 }
+
+var intervalId = window.setInterval(function(){
+
+if(session!=null)
+{
+	async function fetchToken(mobile)
+{
+
+	let tokenOfLogin = localStorage.getItem('token');
+
+	let data = {
+	
+		mobile: session,
+	}
+
+
+	await axios({
+		method: 'post',
+		url: `${env.apiUrl}/fetchToken.php`,
+		data: data
+	}).then(res => {
+	
+
+		if(res.data.token!=tokenOfLogin)
+		{
+			logout();
+		}
+	
+	})
+}
+
+console.log("running after every 5 seconds");
+
+}
+  }, 5000);
+
+
+
 
 // register modal
 var registerModal = document.getElementById("register-modal");
