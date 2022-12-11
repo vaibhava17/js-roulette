@@ -62,15 +62,15 @@ else:
                 $insert_stmt->bindValue(':role', 'user', PDO::PARAM_STR);
                 $insert_stmt->bindValue(':exposer', 0, PDO::PARAM_INT);
                 if ($insert_stmt->execute()):
-                    // $jwt = new JwtHandler();
-                    // $token = $jwt->jwtEncodeData(
-                    //     array(
-                    //         "user_id" => $conn->lastInsertId(),
-                    //         "user_mobile" => $mobile,
-                    //         "user_role" => 'user',
-                    //     )
-                    // );
-                    $returnData = $error_handler->getResponse(1, 201, 'You have successfully registered.', array('mobile' => $mobile));
+                    $jwt = new JwtHandler();
+                    $token = $jwt->jwtEncodeData(
+                        array(
+                            "user_id" => $conn->lastInsertId(),
+                            "user_mobile" => $mobile,
+                            "user_role" => 'user',
+                        )
+                    );
+                    $returnData = $error_handler->getResponse(1, 201, 'You have successfully registered.', array('mobile' => $mobile,'token'=> $token));
                 else:
                     $returnData = $error_handler->getResponse(0, 500, 'Something went wrong!');
                 endif;
