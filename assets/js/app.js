@@ -982,6 +982,8 @@ async function register(e) {
 			session = res.data.mobile;
 			localStorage.setItem('session', res.data.mobile);
 			getBalance(res.data.mobile);
+			addToken(res.data.token);
+			localStorage.setItem('token', res.data.token);
 			toggleBtns();
 		} else {
 			alert(res.data.message);
