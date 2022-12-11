@@ -26,19 +26,19 @@ async function withdraw() {
           return (
             `
               <tr>
-                <th>${item.withdrawid}</th>
-                <th>${item.userid}</th>
-                <th>${item.withdrawreqtime}</th>
-                <th>${item.remainingbalance}</th>
-                <th>${item.withdrawamount}</th>
-                <th>${item.mobile}</th>
-                <th>${item.paymentmode}</th>
-                <th>${item.withdrawstatus}</th>
-                <th>${item.accountnumber}</th>
-                <th>${item.accountname}</th>
-                <th>${item.bankname}</th>
-                <th>${item.ifsc}</th>
-                <th>${item.accounttype}</th>
+                <td>${item.withdrawid}</td>
+                <td>${item.userid}</td>
+                <td>${item.withdrawreqtime}</td>
+                <td>${item.remainingbalance}</td>
+                <td>${item.withdrawamount}</td>
+                <td>${item.mobile}</td>
+                <td>${item.paymentmode}</td>
+                <td>${item.withdrawstatus}</td>
+                <td>${item.accountnumber}</td>
+                <td>${item.accountname}</td>
+                <td>${item.bankname}</td>
+                <td>${item.ifsc}</td>
+                <td>${item.accounttype}</td>
               </tr>
             `
           )

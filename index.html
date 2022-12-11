@@ -280,6 +280,7 @@
                   placeholder="Enter IFSC Code"
                 />
               </div>
+              
               <div class="form-group">
                 <input
                   type="number"
@@ -289,6 +290,21 @@
                   class="form-control"
                   placeholder="Enter Amount"
                 />
+
+                <div class="form-group">
+                  <select
+                    name="accounttype"
+                    value="Savings"
+                    id="account_type"
+                    class="form-control"
+                    tabindex="5"
+                  >
+                
+                    <option value="Savings">Savings</option>
+                    <option value="Current">Current</option>
+                  </select>
+                </div>
+
               </div>
               <span id="alert-message"></span>
               <div class="form-group">

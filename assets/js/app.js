@@ -1,7 +1,7 @@
 const env = {
-//	 apiUrl: 'https://newkhel.in',
+	 apiUrl: 'https://newkhel.in',
 	// apiUrl: 'http://localhost/apps/game-live-app',
-	 apiUrl: 'http://localhost/game',
+	//  apiUrl: 'http://localhost/game',
 }
 
 let session = localStorage.getItem('session');
