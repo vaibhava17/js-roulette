@@ -51,4 +51,11 @@
 
 button {
   background-color: rgb(192, 41, 41);
+  border:1.5px solid white;
+  padding: 6px 10px;
+margin-top: 50px;
+}
+button a{
+  text-decoration: none;
+  color:#f2f2f2;
 }

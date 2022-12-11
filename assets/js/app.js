@@ -1,4 +1,5 @@
 const env = {
+	
 	 apiUrl: 'https://newkhel.in',
 	// apiUrl: 'http://localhost/apps/game-live-app',
 	//  apiUrl: 'http://localhost/game',
@@ -10,6 +11,7 @@ var loginBtn = document.getElementById("login-btn");
 var registerBtn = document.getElementById("register-btn");
 var addBtn = document.getElementById("add-btn");
 var logoutBtn = document.getElementById("logout-btn");
+
 
 var audio = new Audio("./audio.mp3");
 
@@ -53,6 +55,7 @@ function logout() {
 
 	bankValue = 0;
 	document.getElementById('bankSpan').innerText = '0';
+	
 
 	window.location.href = `${env.apiUrl}/index.html`;
 	toggleBtns();
