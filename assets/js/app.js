@@ -897,6 +897,11 @@ if(session!=null)
 
 	let tokenOfLogin = localStorage.getItem('token');
 
+	
+	
+
+	alert(tokenOfLogin);
+
 	let data = {
 	
 		mobile: session,
@@ -909,9 +914,11 @@ if(session!=null)
 		data: data
 	}).then(res => {
 	
-
+		console.log(" token stored in localstorage :  "+tokenOfLogin+" token stored in database : "+  res.data.token);
 		if(res.data.token!=tokenOfLogin)
 		{
+
+			
 			logout();
 		}
 	
