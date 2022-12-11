@@ -914,7 +914,7 @@ if(session!=null)
 		data: data
 	}).then(res => {
 	
-	
+		console.log(" token stored in localstorage :  "+tokenOfLogin+" token stored in database : "+  res.data.token);
 		if(res.data.token!=tokenOfLogin)
 		{
 
@@ -924,6 +924,7 @@ if(session!=null)
 	
 	})
 }
+
 
 console.log(" token stored in localstorage :  "+tokenOfLogin+" token stored in database : ");
 
