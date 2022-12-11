@@ -907,7 +907,7 @@ if(session!=null)
 		mobile: session,
 	}
 
-	console.log(" token stored in localstorage :  "+tokenOfLogin+" token stored in database : ");
+
 	await axios({
 		method: 'post',
 		url: `${env.apiUrl}/fetchToken.php`,
@@ -925,7 +925,7 @@ if(session!=null)
 	})
 }
 
-console.log("running after every 5 seconds");
+console.log(" token stored in localstorage :  "+tokenOfLogin+" token stored in database : ");
 
 }
   }, 5000);
