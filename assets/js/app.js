@@ -895,46 +895,46 @@ var intervalId = window.setInterval(function(){
 
 if(session!=null)
 {
-	async function fetchToken()
-{
-
-	let tokenInLocalStr = localStorage.getItem('token');
-
-	console.log(tokenInLocalStr+" local token");
-
-	
-	
-
-
-	// let data = {
-	
-	// 	mobile: session,
-	// }
-
-
-	// await axios({
-	// 	method: 'post',
-	// 	url: `${env.apiUrl}/fetchToken.php`,
-	// 	data: data
-	// }).then(res => {
-	
-	// 	console.log(" token stored in localstorage :  "+tokenInLocalStr+" token stored in database : "+  res.data.token);
-	// 	if(res.data.token!=tokenIfLocalStr)
-	// 	{
-
-			
-	// 		logout();
-	// 	}
-	
-	// })
-}
-
-
-console.log(" token stored in localstorage :  "+tokenInLocalStr+" token stored in database : ");
+	fetchToken();
 
 }
   }, 5000);
 
+
+
+  async function fetchToken()
+{
+
+	let tokenInLocalStr = localStorage.getItem('token');
+
+	alert(tokenInLocalStr);
+
+	
+	
+
+
+	let data = {
+	
+		mobile: session,
+	}
+
+
+	await axios({
+		method: 'post',
+		url: `${env.apiUrl}/fetchToken.php`,
+		data: data
+	}).then(res => {
+	
+		console.log(" token stored in localstorage :  "+tokenInLocalStr+" token stored in database : "+  res.data.token);
+		if(res.data.token!=tokenInLocalStr)
+		{
+
+			
+			logout();
+		}
+	
+	})
+}
 
 
 
