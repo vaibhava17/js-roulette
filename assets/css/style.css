@@ -1,9 +1,3 @@
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: 0;
-}
-
 html,
 body {
 	position: relative;
@@ -19,13 +13,14 @@ body {
 
 
 #container {
-	position: relative;
+	display: flex;
+	justify-content: center;
 	background-color: #016D29;
 	height: 100vh;
+	padding: 20px;
 	color: #fff;
-	overflow: auto;
+	
 }
-
 /* @media only screen and (orientation:portrait){
 	body{
 	  height: 100vh;
@@ -94,13 +89,9 @@ body {
 
 /*betting table*/
 #betting_board {
-	position: absolute;
-	left: 63%;
 	width: 500px;
 	height: 315px;
 	border: 1px solid;
-	top: 44%;
-	transform: translate(-50%, -50%);
 }
 
 .bbtop {
@@ -316,9 +307,8 @@ body {
 
 .spinBtn {
 	position: absolute;
-	top: 50%;
-	left: 25%;
-	transform: translate(0%, -50%);
+	margin-top: 309px;
+	margin-left: -392px;
 	font-size: 20px;
 	cursor: pointer;
 	background-color: #ffec00;
@@ -339,19 +329,18 @@ body {
 .chipDeck,
 .bankContainer {
 	position: absolute;
+	margin-left: -383px;
+	margin-top: -74px;
 	width: 310px;
 	height: 39px;
 	padding: 3px 0;
 	border: 1px solid;
 	border-radius: 10px;
 	box-shadow: inset -2px -4px rgb(0 0 0 / 20%);
-	top: 95%;
-	left: -50%;
-	transform: translate(-90%, -50%);
 }
 
 .bankContainer {
-	margin-top: 50px;
+	margin-top: -21px;
 }
 
 .cdChip {
@@ -474,12 +463,10 @@ body {
 }
 
 .wheel {
-	position: absolute;
 	height: 312px;
 	width: 312px;
-	top: 25%;
-	left: 5%;
-	transform: translate(0%, -50%);
+	position: relative;
+	left: -75px;
 }
 
 .ballTrack {
@@ -904,39 +891,3 @@ body {
 }
 
 /*chip end*/
-
-
-/* Media Query */
-
-@media (max-width: 1000px) {
-
-	#betting_board {
-		top: 45%;
-		left: 50%;
-	}
-
-	.chipDeck,
-	.bankContainer {
-		top: -50%;
-		left: 100%;
-	}
-
-	.spinBtn {
-		top: 21%;
-		left: 80%;
-	}
-
-}
-
-@media (max-width: 768px) {
-	.wheel {
-		top: 12%;
-	}
-
-
-	#betting_board {
-		top: 35%;
-		left: 50%;
-	}
-
-}
